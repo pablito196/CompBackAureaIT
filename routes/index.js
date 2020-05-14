@@ -8,6 +8,7 @@ import presentacionRouter from './presentacion';
 import pedidoRouter from './pedido';
 import usuarioRouter from './usuario';
 import productoRouter from './producto';
+import categoriaEmpresaRouter from './categoriaempresa';
 
 const router = routerx();
 
@@ -20,5 +21,6 @@ router.use('/presentacion',presentacionRouter);
 router.use('/pedido',pedidoRouter);
 router.use('/usuario',usuarioRouter);
 router.use('/producto',productoRouter);
+router.use('/categoriaempresa',categoriaEmpresaRouter);
 
 export default router;

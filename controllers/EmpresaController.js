@@ -33,7 +33,8 @@ export default {
     list: async (req,res,next) =>{
         try {
             let valor=req.query.valor;
-            const reg = await models.Empresa.find({'nombre':new RegExp(valor,'i')});
+            const reg = await models.Empresa.find({'nombre':new RegExp(valor,'i')})
+            .populate('categoriaempresa',{descripcion:1});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -56,7 +57,7 @@ export default {
     },
     update: async (req,res,next) =>{
         try {
-            const reg = await models.Empresa.findByIdAndUpdate({_id:req.body._id},{nombre:req.body.nombre,nit:req.body.nit,direccion:req.body.direccion,
+            const reg = await models.Empresa.findByIdAndUpdate({_id:req.body._id},{categoriaempresa:req.body.categoriaempresa,nombre:req.body.nombre,nit:req.body.nit,direccion:req.body.direccion,
                                                                 logo:req.body.logo,telefono:req.body.telefono,ciudad:req.body.ciudad});
             res.status(200).json(reg);
         } catch (e) {

@@ -1,5 +1,7 @@
 import mongoose, {Schema} from 'mongoose';
 const empresaSchema = new Schema({
+
+    categoriaempresa: {type: Schema.ObjectId, ref:'categoriaempresa',required:true},
     nombre:{type:String,maxlength:120,unique:true,required:true},
     nit:{type:String,maxlength:20},
     direccion:{type:String,maxlength:70},

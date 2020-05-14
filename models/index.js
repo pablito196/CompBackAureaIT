@@ -7,6 +7,7 @@ import CaracteristicaProducto from './caracteristicaproducto';
 import Producto from './producto';
 import Pedido from './pedido';
 import Usuario from './usuario';
+import CategoriaEmpresa from './categoriaempresa';
 
 export default{
     Empresa,
@@ -17,5 +18,6 @@ export default{
     CaracteristicaProducto,
     Producto,
     Pedido,
-    Usuario
+    Usuario,
+    CategoriaEmpresa
 }

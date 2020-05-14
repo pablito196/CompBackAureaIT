@@ -1,10 +1,9 @@
 import models from '../models';
-import mongoose from 'mongoose';
 
 export default {
     add: async (req,res,next) =>{
         try {
-            const reg = await models.CaracteristicaProducto.create(req.body);
+            const reg = await models.CategoriaEmpresa.create(req.body);
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -16,7 +15,7 @@ export default {
     },
     query: async (req,res,next) =>{
         try {
-            const reg = await models.CaracteristicaProducto.findOne({_id:req.query._id});
+            const reg = await models.CategoriaEmpresa.findOne({_id:req.query._id});
             if(!reg){
                 res.status(400).send({
                     message: 'El registro no existe'
@@ -33,10 +32,31 @@ export default {
     },
     list: async (req,res,next) =>{
         try {
-            let valor=req.query.valor;
-            var idProducto = mongoose.Types.ObjectId(valor);
             //let valor=req.query.valor;
-            const reg = await models.CaracteristicaProducto.find({'producto':idProducto});
+            const reg = await models.CategoriaEmpresa.find(/*{'nombre':new RegExp(valor,'i')}*/);
+            res.status(200).json(reg);
+        } catch (e) {
+            res.status(500).send({
+                message:'Ocurrio un error'
+            });
+            next(e);
+        }
+    },
+    listActivas: async (req,res,next) =>{
+        try {
+            let valor=req.query.valor;
+            const reg = await models.CategoriaEmpresa.find({estado:1});
+            res.status(200).json(reg);
+        } catch (e) {
+            res.status(500).send({
+                message:'Ocurrio un error'
+            });
+            next(e);
+        }
+    },
+    update: async (req,res,next) =>{
+        try {
+            const reg = await models.CategoriaEmpresa.findByIdAndUpdate({_id:req.body._id},{descripcion:req.body.descripcion});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -47,7 +67,7 @@ export default {
     },
     remove: async (req,res,next) =>{
         try {
-            const reg = await models.CaracteristicaProducto.findByIdAndDelete({_id:req.body._id});
+            const reg = await models.CategoriaEmpresa.findByIdAndDelete({_id:req.body._id});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -58,7 +78,7 @@ export default {
     },
     activate: async (req,res,next) =>{
         try {
-            const reg = await models.CaracteristicaProducto.findByIdAndUpdate({_id:req.body._id},{estado:1});
+            const reg = await models.CategoriaEmpresa.findByIdAndUpdate({_id:req.body._id},{estado:1});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -69,7 +89,7 @@ export default {
     },
     deactivate: async (req,res,next) =>{
         try {
-            const reg = await models.CaracteristicaProducto.findByIdAndUpdate({_id:req.body._id},{estado:0});
+            const reg = await models.CategoriaEmpresa.findByIdAndUpdate({_id:req.body._id},{estado:0});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -78,6 +98,4 @@ export default {
             next(e);
         }
     }, 
-
-    
 }
