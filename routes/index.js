@@ -9,6 +9,7 @@ import pedidoRouter from './pedido';
 import usuarioRouter from './usuario';
 import productoRouter from './producto';
 import categoriaEmpresaRouter from './categoriaempresa';
+import imagenProductoRouter from './imagenproducto';
 
 const router = routerx();
 
@@ -22,5 +23,6 @@ router.use('/pedido',pedidoRouter);
 router.use('/usuario',usuarioRouter);
 router.use('/producto',productoRouter);
 router.use('/categoriaempresa',categoriaEmpresaRouter);
+router.use('/imagenproducto',imagenProductoRouter);
 
 export default router;

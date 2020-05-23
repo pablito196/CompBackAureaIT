@@ -1,9 +1,26 @@
 import models from '../models';
 
+
 export default {
     add: async (req,res,next) =>{
         try {
-            const reg = await models.Empresa.create(req.body);
+            const empresa = new models.Empresa();
+            //
+            
+            empresa.categoriaempresa = req.body.categoriaempresa;
+            empresa.nombre = req.body.nombre;
+            empresa.nit = req.body.nit;
+            empresa.direccion = req.body.direccion;
+            empresa.telefono = req.body.telefono;
+            empresa.ciudad = req.body.ciudad;
+            empresa.filename = req.file.filename;
+            empresa.path = '/public/img/uploads/'+req.file.filename;
+            empresa.originalname = req.file.originalname;
+            
+            const reg = await empresa.save();
+            //console.log(empresa);
+            //
+            //const reg = await models.Empresa.create(req.body);
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -99,5 +116,11 @@ export default {
             });
             next(e);
         }
-    }, 
+    },
+    ///
+    upload: async (req,res,next) => {
+        console.log(req.file);
+        console.log('Imagen subida');
+    },
+    ///
 }

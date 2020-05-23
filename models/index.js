@@ -8,6 +8,7 @@ import Producto from './producto';
 import Pedido from './pedido';
 import Usuario from './usuario';
 import CategoriaEmpresa from './categoriaempresa';
+import ImagenProducto from './imagenproducto';
 
 export default{
     Empresa,
@@ -19,5 +20,6 @@ export default{
     Producto,
     Pedido,
     Usuario,
-    CategoriaEmpresa
+    CategoriaEmpresa,
+    ImagenProducto
 }

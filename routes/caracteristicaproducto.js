@@ -8,6 +8,7 @@ router.post('/add',auth.verifyUsuario,caracteristicaProductoController.add);
 router.get('/query',/*auth.verifyAlmacenero,*/caracteristicaProductoController.query);
 router.get('/list',auth.verifyUsuario,caracteristicaProductoController.list);
 router.delete('/remove',auth.verifyUsuario,caracteristicaProductoController.remove);
+//router.delete('/remove',caracteristicaProductoController.remove);
 router.put('/activate',/*auth.verifyAlmacenero,*/caracteristicaProductoController.activate);
 router.put('/deactivate',/*auth.verifyAlmacenero,*/caracteristicaProductoController.deactivate);
 

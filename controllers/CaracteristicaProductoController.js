@@ -47,7 +47,9 @@ export default {
     },
     remove: async (req,res,next) =>{
         try {
-            const reg = await models.CaracteristicaProducto.findByIdAndDelete({_id:req.body._id});
+            let valor=req.query.valor;
+            var idCaracteristica = mongoose.Types.ObjectId(valor);
+            const reg = await models.CaracteristicaProducto.findByIdAndDelete({'_id':idCaracteristica});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({

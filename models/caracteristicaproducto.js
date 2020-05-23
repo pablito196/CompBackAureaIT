@@ -3,19 +3,12 @@ const caracteristicaProductoSchema = new Schema({
     producto:{type: Schema.ObjectId, ref:'producto'},
     nombre:{type:String,maxlength:100,required:true},
     valor:[{
-        /*_id:{
-            type:String,
-            required:true
-        },*/
         nombre:{
             type:String,
             required:true,
             maxlength:80
         },
-        /*estado:{
-            type:Number,
-            default:1,
-        }*/
+        
     }],
     estado:{type:Number,default:1}
     
