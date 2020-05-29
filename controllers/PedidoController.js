@@ -1,4 +1,5 @@
 import models from '../models';
+import mongoose from 'mongoose';
 /*async function aumentarCantidad(idproducto,cantidadIngreso){
     let {cantidad} = await models.Producto.findOne({_id:idarticulo});
     let nuevaCantidad = parseInt(cantidad)+parseInt(cantidadIngreso);
@@ -46,10 +47,12 @@ export default {
             next(e);
         }
     },
+    //lista de pedidos por empresa
     list: async (req,res,next) =>{
         try {
             let valor=req.query.valor;
-            const reg = await models.Pedido.find();
+            var idEmpresa = mongoose.Types.ObjectId(valor);
+            const reg = await models.Pedido.find({'empresa':idEmpresa});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -58,7 +61,20 @@ export default {
             next(e);
         }
     },
-    
+    //lista de pedidos pendientes de envio por empresa
+    listPedidosPendientes: async (req,res,next) =>{
+        try {
+            let valor=req.query.valor;
+            var idEmpresa = mongoose.Types.ObjectId(valor);
+            const reg = await models.Pedido.find({'empresa':idEmpresa, estado:1});
+            res.status(200).json(reg);
+        } catch (e) {
+            res.status(500).send({
+                message:'Ocurrio un error'
+            });
+            next(e);
+        }
+    },
     activate: async (req,res,next) =>{
         try {
             const reg = await models.Pedido.findByIdAndUpdate({_id:req.body._id},{estado:1});

@@ -8,7 +8,7 @@ export default {
             
             imagenProducto.producto = req.body.producto
             imagenProducto.filename = req.file.filename;
-            imagenProducto.path = '/public/img/uploads/'+req.file.filename;
+            imagenProducto.path = '/img/uploads/'+req.file.filename;
             imagenProducto.originalname = req.file.originalname;
             
             const reg = await imagenProducto.save();

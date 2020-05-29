@@ -13,7 +13,7 @@ const pedidoSchema = new Schema({
             required:true
         },
         producto:{
-            type:String,
+            type: Schema.ObjectId, ref:'producto',
             required:true
         },
         cantidad:{
@@ -23,6 +23,10 @@ const pedidoSchema = new Schema({
         costo:{
             type:Number,
             required:true
+        },
+        comentario:{
+            type:String,
+            maxlength:255
         },
         
     }],
