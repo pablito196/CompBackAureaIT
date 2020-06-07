@@ -7,6 +7,7 @@ const router = routerx();
 router.post('/add',auth.verifyUsuario,medidaController.add);
 router.get('/query',/*auth.verifyAlmacenero,*/medidaController.query);
 router.get('/list',auth.verifyUsuario,medidaController.list);
+router.get('/listactivas',auth.verifyUsuario,medidaController.listActivas);
 router.put('/update',auth.verifyUsuario,medidaController.update);
 router.delete('/remove',/*auth.verifyAlmacenero,*/medidaController.remove);
 router.put('/activate',auth.verifyUsuario,medidaController.activate);

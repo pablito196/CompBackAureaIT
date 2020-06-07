@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 export default {
     add: async (req,res,next) =>{
         try {
-            const reg = await models.Categoria.create(req.body);
+            const reg = await models.Subcategoria.create(req.body);
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -16,7 +16,7 @@ export default {
     },
     query: async (req,res,next) =>{
         try {
-            const reg = await models.Categoria.findOne({_id:req.query._id});
+            const reg = await models.Subcategoria.findOne({_id:req.query._id});
             if(!reg){
                 res.status(400).send({
                     message: 'El registro no existe'
@@ -31,12 +31,13 @@ export default {
             next(e);
         }
     },
-    //lista de categorias por empresa
+    //lista de subcategorias por empresa
     list: async (req,res,next) =>{
         try {
             let valor=req.query.valor;
             var idEmpresa = mongoose.Types.ObjectId(valor);
-            const reg = await models.Categoria.find({'empresa':idEmpresa});
+            const reg = await models.Subcategoria.find({'empresa':idEmpresa})
+            .populate('categoria',{descripcion:1});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -46,11 +47,13 @@ export default {
         }
     },
 
-    listActivas: async (req,res,next) =>{
+    //lista de subcategorias por categoria
+    listPorCategoria: async (req,res,next) =>{
         try {
             let valor=req.query.valor;
-            var idEmpresa = mongoose.Types.ObjectId(valor);
-            const reg = await models.Categoria.find({'empresa':idEmpresa,'estado':1});
+            var idCategoria = mongoose.Types.ObjectId(valor);
+            const reg = await models.Subcategoria.find({'categoria':idCategoria,'estado':1})
+            .sort({'descripcion':1});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -62,7 +65,7 @@ export default {
     
     update: async (req,res,next) =>{
         try {
-            const reg = await models.Categoria.findByIdAndUpdate({_id:req.body._id},{descripcion:req.body.descripcion});
+            const reg = await models.Subcategoria.findByIdAndUpdate({_id:req.body._id},{categoria:req.body.categoria,descripcion:req.body.descripcion});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -73,7 +76,7 @@ export default {
     },
     remove: async (req,res,next) =>{
         try {
-            const reg = await models.Categoria.findByIdAndDelete({_id:req.body._id});
+            const reg = await models.Subcategoria.findByIdAndDelete({_id:req.body._id});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -84,7 +87,7 @@ export default {
     },
     activate: async (req,res,next) =>{
         try {
-            const reg = await models.Categoria.findByIdAndUpdate({_id:req.body._id},{estado:1});
+            const reg = await models.Subcategoria.findByIdAndUpdate({_id:req.body._id},{estado:1});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({
@@ -95,7 +98,7 @@ export default {
     },
     deactivate: async (req,res,next) =>{
         try {
-            const reg = await models.Categoria.findByIdAndUpdate({_id:req.body._id},{estado:0});
+            const reg = await models.Subcategoria.findByIdAndUpdate({_id:req.body._id},{estado:0});
             res.status(200).json(reg);
         } catch (e) {
             res.status(500).send({

@@ -45,6 +45,19 @@ export default {
             next(e);
         }
     },
+    listactivas: async (req,res,next) =>{
+        try {
+            let valor=req.query.valor;
+            var idEmpresa = mongoose.Types.ObjectId(valor);
+            const reg = await models.Presentacion.find({'empresa':idEmpresa,'estado':1});
+            res.status(200).json(reg);
+        } catch (e) {
+            res.status(500).send({
+                message:'Ocurrio un error'
+            });
+            next(e);
+        }
+    },
     update: async (req,res,next) =>{
         try {
             const reg = await models.Presentacion.findByIdAndUpdate({_id:req.body._id},{descripcion:req.body.descripcion});

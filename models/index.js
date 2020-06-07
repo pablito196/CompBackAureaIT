@@ -1,5 +1,6 @@
 import Empresa from './empresa';
 import Categoria from './categoria';
+import Subcategoria from './subcategoria';
 import Cliente from './cliente';
 import Presentacion from './presentacion';
 import Medida from './medida';
@@ -13,6 +14,7 @@ import ImagenProducto from './imagenproducto';
 export default{
     Empresa,
     Categoria,
+    Subcategoria,
     Cliente,
     Presentacion,
     Medida,

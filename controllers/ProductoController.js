@@ -56,6 +56,7 @@ export default {
             var idEmpresa = mongoose.Types.ObjectId(valor);
             const reg = await models.Producto.find({'empresa':idEmpresa})
             .populate('categoria',{descripcion:1})
+            .populate('subcategoria',{descripcion:1})
             .populate('medida',{descripcion:1})
             .populate('presentacion',{descripcion:1});
             res.status(200).json(reg);
@@ -68,7 +69,7 @@ export default {
     },
     update: async (req,res,next) =>{
         try {
-            const reg = await models.Producto.findByIdAndUpdate({_id:req.body._id},{categoria:req.body.categoria,descripcion:req.body.descripcion,codigo:req.body.codigo,
+            const reg = await models.Producto.findByIdAndUpdate({_id:req.body._id},{categoria:req.body.categoria,subcategoria:req.body.subcategoria,descripcion:req.body.descripcion,codigo:req.body.codigo,
                                                                 imagen:req.body.imagen,presentacion:req.body.presentacion,cantidadPresentacion:req.body.cantidadPresentacion,
                                                                 medida:req.body.medida,cantidadMedida:req.body.cantidadMedida,precioVenta:req.body.precioVenta
             });

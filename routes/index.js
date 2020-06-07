@@ -1,6 +1,7 @@
 import routerx from 'express-promise-router';
 import empresaRouter from './empresa';
 import categoriaRouter from './categoria';
+import subcategoriaRouter from './subcategoria';
 import clienteRouter from './cliente';
 import caracteristicaProductoRouter from './caracteristicaproducto';
 import medidaRouter from './medida'
@@ -15,6 +16,7 @@ const router = routerx();
 
 router.use('/empresa',empresaRouter);
 router.use('/categoria',categoriaRouter);
+router.use('/subcategoria',subcategoriaRouter);
 router.use('/cliente',clienteRouter);
 router.use('/caracteristicaproducto',caracteristicaProductoRouter);
 router.use('/medida',medidaRouter);
